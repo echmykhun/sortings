@@ -17,6 +17,9 @@ var Sorter = (function () {
 
     Sorter.prototype = {
         array: null,
+        setArray: function (array) {
+            this.array = array;
+        },
         bubbleSorting: function () {
 
             var bool;
@@ -34,10 +37,51 @@ var Sorter = (function () {
             } while (bool);
 
             return this.array;
+        },
+        shakerSorting: function () {
+            var i, j, tmp;
+            for (i = 0; i < this.array.length / 2; i++) {
+                var swapped = false;
+                for (j = i; j < this.array.length - i - 1; j++) {
+                    if (this.array[j] > this.array[j + 1]) {
+                        tmp = this.array[j];
+                        this.array[j] = this.array[j + 1];
+                        this.array[j + 1] = tmp;
+                        swapped = true;
+                    }
+                }
+                for (j = this.array.length - 2 - i; j > i; j--) {
+                    if (this.array[j] < this.array[j - 1]) {
+                        tmp = this.array[j];
+                        this.array[j] = this.array[j - 1];
+                        this.array[j - 1] = tmp;
+                        swapped = true;
+                    }
+                }
+                if (!swapped) break;
+            }
+
+            return this.array;
+        },
+
+        stupidSort: function () {
+            var tmp, i = 0;
+            while (i < this.array.length) {
+                if (this.array[i + 1] < this.array[i]) {
+                    tmp = this.array[i];
+                    this.array[i] = this.array[i + 1];
+                    this.array[i + 1] = tmp;
+                    i = 0;
+                } else {
+                    i++;
+                }
+            }
+
+            return this.array;
         }
 
+
     };
-    c
 
 
     return Sorter;
